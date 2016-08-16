@@ -1,0 +1,56 @@
+{
+  "id": "/locust/master",
+  "cpus": 1,
+  "mem": 4096,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "lloesche/locust-dcos",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 8089,
+          "hostPort": 0,
+          "protocol": "tcp",
+          "labels": {
+            "VIP_0": "10.0.7.10:8089"
+          }
+        },
+        {
+          "containerPort": 5557,
+          "hostPort": 0,
+          "protocol": "tcp",
+          "labels": {
+            "VIP_0": "10.0.7.10:5557"
+          }
+        },
+        {
+          "containerPort": 5558,
+          "hostPort": 0,
+          "protocol": "tcp",
+          "labels": {
+            "VIP_0": "10.0.7.10:5558"
+          }
+        }
+      ]
+    }
+  },
+  "env": {
+    "LOCUST_MODE": "master",
+    "LOAD_TEST_URL": "https://mesosphere.com",
+    "LOCUST_FILE": "https://dl.dropboxusercontent.com/u/1025643/locustfile.py"
+  },
+  "healthChecks": [
+    {
+      "path": "/",
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3,
+      "ignoreHttp1xx": false
+    }
+  ]
+}

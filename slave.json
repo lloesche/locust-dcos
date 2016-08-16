@@ -1,0 +1,20 @@
+{
+  "id": "/locust/slave",
+  "cpus": 1,
+  "mem": 512,
+  "instances": 10,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "lloesche/locust-dcos",
+      "network": "BRIDGE",
+      "forcePullImage": false
+    }
+  },
+  "env": {
+    "LOAD_TEST_URL": "https://mesosphere.com",
+    "LOCUST_FILE": "https://dl.dropboxusercontent.com/u/1025643/locustfile.py",
+    "LOCUST_MODE": "slave",
+    "LOCUST_MASTER": "10.0.7.10"
+  }
+}
