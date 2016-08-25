@@ -1,8 +1,8 @@
 {
-  "id": "/locust/slave",
+  "id": "/locust/locust-slave",
   "cpus": 1,
   "mem": 512,
-  "instances": 10,
+  "instances": 1,
   "container": {
     "type": "DOCKER",
     "docker": {

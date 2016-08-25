@@ -1,5 +1,5 @@
 {
-  "id": "/locust/master",
+  "id": "/locust/locust-master",
   "cpus": 1,
   "mem": 4096,
   "instances": 1,

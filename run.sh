@@ -4,11 +4,6 @@ set -euo pipefail
 mkdir -p /locust
 cd /locust
 
-if [ -z "${LOAD_TEST_URL-}" ]; then
-    echo "LOAD_TEST_URL env var not set"
-    exit 1
-fi
-
 if [ -n "${LOCUST_FILE-}" ]; then
     if [[ "$LOCUST_FILE" == http* ]]; then
         echo "Downloading $LOCUST_FILE"
@@ -21,7 +16,11 @@ if [ -n "${LOCUST_FILE-}" ]; then
     fi
 fi
 
-ARGS=( --locustfile=/locust/locustfile.py "--host=${LOAD_TEST_URL-}" )
+ARGS=( --locustfile=/locust/locustfile.py )
+
+if [ -n "${LOAD_TEST_URL-}" ]; then
+    ARGS+=( "--host=${LOAD_TEST_URL}" )
+fi
 
 if [ -n "${LOCUST_MODE-}" ]; then
     case "$LOCUST_MODE" in
