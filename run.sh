@@ -18,9 +18,7 @@ fi
 
 ARGS=( --locustfile=/locust/locustfile.py )
 
-if [ -n "${LOAD_TEST_URL-}" ]; then
-    ARGS+=( "--host=${LOAD_TEST_URL}" )
-fi
+[ -n "${LOAD_TEST_URL-}" ] && ARGS+=( "--host=${LOAD_TEST_URL}" )
 
 if [ -n "${LOCUST_MODE-}" ]; then
     case "$LOCUST_MODE" in
